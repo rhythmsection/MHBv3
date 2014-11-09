@@ -1,0 +1,15 @@
+#hey, it's an ignore list
+
+venv
+
+#python specific
+*.pyc
+ 
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.wav
+*.mp3

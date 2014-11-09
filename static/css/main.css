@@ -1,0 +1,100 @@
+html, body {
+    font-family: courier;
+    color: red;
+    padding: 0;
+    margin: 0;
+    background-color: red;
+}
+
+a {
+    color: #81C740;
+    text-decoration: none;
+}
+
+
+button {
+align-items: flex-start;
+text-align: center;
+cursor: default;
+color: buttontext;
+padding: 0px;
+border: 0px outset buttonface;
+border-image-source: initial;
+border-image-slice: initial;
+border-image-width: initial;
+border-image-outset: initial;
+border-image-repeat: initial;
+background-color: buttonface;
+box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+#body {
+    color: black;
+    background-color: black;
+    width: 700px;
+    height: 805px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+#body img{
+    width: 100%;
+    vertical-align: bottom;
+}
+
+#boombox {
+
+}
+
+#boombox img{
+    width: 100%;
+
+}
+
+#main_title {
+    font-family: 'Permanent Marker', cursive;
+    background-image:url('/static/images/track_title.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    padding-top: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 100px;
+    width: 100%;
+    vertical-align: top;
+    text-align: center;
+    line-height: 25px;
+
+}
+
+#main_title h2 {
+    padding-top: 6px;
+}
+
+
+#results {
+    background-image:url('/static/images/cassette_back.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #151515;
+    color: white;
+    height: 200px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 20px;
+
+}
+
+#results img{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+
+}
+
