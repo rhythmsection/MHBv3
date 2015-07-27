@@ -1,6 +1,6 @@
 
 
-![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/images/mhb_alt_logo.png)
+![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/readme/mhb_alt_logo.png)
 ===
 
 
@@ -47,4 +47,3 @@ Finally, comparison.py brings the aforementioned processes together and combines
 
 Version 3 implements an "admin portal", designed to give more functionality to the user and further availability for growth. Currently, the user can use the admin functionality to maintain the database (which had to be done through the terminal previously), as well as test the system. New format also aims to provide further information and a more seamless, cleaner platform. *Please note that full-functionality is currently limited to modern Chrome browsers.*
 
-![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/readme/screen_shot2.gif)
