@@ -1,6 +1,6 @@
 
 
-![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/readme/mhb_alt_logo.png)
+![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/readme/mhb_alt_logo.gif)
 ===
 
 
