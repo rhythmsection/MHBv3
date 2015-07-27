@@ -1,32 +1,41 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, Text
+from flask_sqlalchemy import SQLAlchemy
 
-from sqlalchemy.orm import sessionmaker
+db = SQLAlchemy()
 
+####################################################
 
-ENGINE = None
-Session = None
+class Fingerprint(db.Model):
 
-Base = declarative_base()
-
-#Creating database to store song information.
-
-class Fingerprint(Base):
     __tablename__ = "fingerprints"
 
-    id = Column(Integer, primary_key = True)
-    title = Column(String, nullable = True)
-    artist = Column(String, nullable = True)
-    album = Column(String, nullable = True)
-    fingerprint = Column(Text, nullable = True)
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(50), nullable = True)
+    artist = db.Column(db.String(50), nullable = True)
+    fingerprint = db.Column(db.PickleType, nullable = True)
 
-def connect():
-    global ENGINE
-    global Session
 
-    ENGINE = create_engine("sqlite:///fingerprint_database.db", echo=True)
-    Session = sessionmaker(bind=ENGINE)
+class AppTest(db.Model):
 
-    return Session()
+    __tablename__ = "apptests"
+
+    id = db.Column(db.Integer, primary_key = True)
+    song_played = db.Column(db.String(50), nullable = True)
+    artist_played = db.Column(db.String(50), nullable = True)
+    highest_match_title = db.Column(db.String(50), nullable = True)
+    highest_match_artist = db.Column(db.String(50), nullable = True)
+    highest_offset = db.Column(db.Integer, nullable = True)
+    noise_level = db.Column(db.Integer, nullable = True)
+
+
+def connect_to_db(app):
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fingerprints.db'
+    db.app = app
+    db.init_app(app)
+
+
+if __name__ == "__main__":
+
+    from base_app import app
+    connect_to_db(app)
+    print "Connected to DB."
 

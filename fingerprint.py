@@ -7,46 +7,50 @@ import math
 import sys
 import hashlib
 
-# a global variable that represents the number of pockets to split each bin into.
 NUM_POCKETS = 60
 
-'''If you want to fingerprint straight from the command line instead of using the interface'''
-# filename = sys.argv[1]
 
-#slice the data from the wav file into chunks. 
 def slice_some_data(filename):
-	#return the rate and the amount of data as separate variables.
+
+	'''
+	Turn the music data into frequencies using fourier transform and store them in 
+	dictionary "bins" to iterate over them. Data is separated by frequency subsets
+	with a 50 percent overlap. 44100Hz per second. 
+
+	'''
+	
 	rate, data = wavfile.read(filename)
 	index = 0
-	#dictionary storage of all of the data
 	bins = collections.defaultdict(list)
-	#slices data into subsets based on the number of Hz. Note 50% overlap. 
 	for i in range(0, len(data), 11025):
 		slice = data[i:i+22050]
-		#run fourier transform on each slice.
 		fourier_transformed = rfft(slice)
-		#assign these frequencies to bin entries in bin.
 		for frequency in fourier_transformed:
 			bins[index].append(frequency.real)
 		index += 1
 	return bins
 
-#creates and stores frequencies from FFT into logarithmically filled pockets within each bin. 
+
 def slice_frequencies_into_log_pockets(bin_key, bins):
+
+	'''
+	Within each bin, separates the frequencies again into logarithmically built pockets, 
+	using the global NUM_POCKETS variable as determined above. Note that frequency is defined
+	by location, hence the use of enumerate.
+
+	'''
+
 	bin_location = bins[bin_key]
 	max_frequencies_in_bin = []
 	amplitudes_in_pocket = []
 	frequencies_in_bin = []
 
-	#the max log index of the entire bin.
 	max_log_idx = math.log10(len(bin_location))
-	#the MLI divided by the number of pockets (to find how high we go per pocket)
 	pocket_size = float(max_log_idx)/NUM_POCKETS
 
-	#pockets is a list of lists--that is each of the pockets in bin. 
+	#pockets is a list of lists--that is each of the pockets in a bin. 
 	pockets = [ [] for x in range(NUM_POCKETS) ]
 	
-	#use enumerate to give both frequency and amplitude for each amp in the bin. Sort into pockets. 
 	for frequency, amplitude in enumerate(bin_location):
 		if frequency == 0:
 			continue
@@ -55,16 +59,29 @@ def slice_frequencies_into_log_pockets(bin_key, bins):
 		pockets[min(pocket_idx, NUM_POCKETS-1)].append((abs(amplitude), frequency))
 	return pockets
 
-#finds the max amp of each pocket. 
+
 def find_pocket_max(pockets):
+
+	'''
+	Find the max amplitude in pocket.
+
+	'''
+
 	max_pockets = []
 	for p in pockets[5:]:
 		if p:
 			max_pockets.append((max(p), p.index(max(p))))
 	return max_pockets
 
-#trims the actual max amplitudes in each pockets by a minimum amplitude
+
 def trim_minimum_amplitudes(max_pockets):
+
+	'''
+	Trims the actual max amplitudes by pocket in each bin by a minimum amplitude
+	to filter out very low amplitude "noise"
+
+	'''
+
 	trimmed_max_pockets = []
 	min_amp = 1000.0
 	for max_number in max_pockets:
@@ -73,16 +90,28 @@ def trim_minimum_amplitudes(max_pockets):
 			trimmed_max_pockets.append((max_number[0][1], max_number[1]))
 	return trimmed_max_pockets
 
-# assigning frequencies to time based locations
+
 def assigning_time_to_frequency_points(music_fingerprint):
+
+	'''
+	Assigns frequencies to time based locations via index.
+
+	'''
+
 	frequency_pair_list = []
 	for idx, trimmed_max_pockets in enumerate(music_fingerprint):
 		for number in trimmed_max_pockets:
 			frequency_pair_list.append((number, idx))
 	return frequency_pair_list
 
-#creates locational fingerprint
+
 def location_fingerprint(filename):
+
+	'''
+	Full fingerprint build relying on prior functions.
+
+	'''
+
 	raw_fingerprint = []
 	bins = slice_some_data(filename)
 	bin_count = len(bins)
@@ -96,11 +125,5 @@ def location_fingerprint(filename):
 	return location_fingerprint
 
 
-
-def main(filename):
-	location_fingerprint(filename)
-	return location_fingerprint
-
-
 if __name__ == '__main__':	
-	main(filename)
+	location_fingerprint(filename)
