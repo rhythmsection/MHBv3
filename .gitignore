@@ -13,3 +13,4 @@ venv
 *.out
 *.wav
 *.mp3
+*.db
