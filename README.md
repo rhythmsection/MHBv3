@@ -1,6 +1,6 @@
 
 
-![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/readme/readme_logo.gif)
+![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/images/mhb_alt_logo.png)
 ===
 
 
@@ -17,9 +17,9 @@ Before the magic happens, the user needs to create and store fingerprints for th
 
 Creates a SQLAlchemy class that establishes the needed variables for "fingerprints" table that holds the information necessary for comparison to a submitted music clip. 
 
-######(seed.py)
+######(NEW: ADMIN PORTAL)
 
-Fills a pre-existing database with fingerprints in concert with the fingerprint.py acoustic fingerprinting algorithm, assigning them to unique ID numbers. Please note that, currently, the rest of the song information must be filled in manually. *For optimal results, a minimum of the song title (title) and artist name (artist) should be input into the database for each song*
+After setting up the database, user can now use the provided "Database Management" toolset to add and remove fingerprints from the database. 
 
 ###Implementation
 
@@ -35,18 +35,16 @@ Also in order to trim excess data, the algorithm trims any very low amplitudes. 
 
 Finally, it discards the amplitudes and takes only the frequencies from the tuple data pairs, tying them to their respective time markers, indicated by the bins that hold them. This data (frequency, time) becomes the individual fingerprint. 
 
-######(align.py)
+######(comparison.py)
 
 In order to compare fingerprints between the submitted clip and the database, the algorithm looks for points that align and records the offset. For example, if the same frequencies occur within bin 4 in the clip and bin 23 in a song in the database, the offset would be 19. If the clip is from the song being queried, a high number of reoccuring offset intervals would be expected at the point where the song and the clip overlap. This returns a tally of those intervals.
-
-######(comparison.py)
 
 Finally, comparison.py brings the aforementioned processes together and combines them to iterate over the new clip and compare it to the entries in the database. 
 
 ###User Experience
 
-######(receiveaudio.html)
+######(NEW: ADMIN PORTAL)
 
-The front-end uses HTML, CSS and JavaScript (including the magic of Angular.js, Recorder.js, GetUserMedia()) in order to create a user-friendly one-button input. The application requires and must be granted permission to use the computer's microphone through the browser's interface in order to activate functionality. *Please note that full-functionality is currently limited to modern Chrome browsers.*
+Version 3 implements an "admin portal", designed to give more functionality to the user and further availability for growth. Currently, the user can use the admin functionality to maintain the database (which had to be done through the terminal previously), as well as test the system. New format also aims to provide further information and a more seamless, cleaner platform. *Please note that full-functionality is currently limited to modern Chrome browsers.*
 
 ![alt tag](https://raw.githubusercontent.com/rhythmsection/MHB/master/static/readme/screen_shot2.gif)

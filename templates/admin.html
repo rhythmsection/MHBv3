@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% block body %}
 	<center>
-  	<div class="container-fluid cent" style="width:60%">
+  	<div class="container-fluid cent" style="width:70%">
 		<div class="btn-group btn-group-justified" role="group">
 		  <div class="btn-group" role="group" style="margin-top:10px">
 		    <button id="run" type="button" class="btn btn-default">Record and Run</button>
@@ -16,11 +16,11 @@
 		    <button id="about" type="button" class="btn btn-default">About MHB</button>
 		  </div>
 		</div>
-        <div id="main-div" class="well transparent" style="color:white; visibility:visible">
-          <form action="/full_app">
+        <div id="main-div" class="well transparent" style="color:white; visibility:visible; padding:0">
+          <form action="/full_app" style="margin-bottom:0">
             <div>
               {% block mhb %}
-                <button class="btn btn-danger" type="submit">Start Here</button>
+                <button class="btn btn-danger" type="submit">Grab Your Vinyl and Hop On Your Fixie</button>
               {% endblock %}  
             </div>
           </form>
@@ -31,13 +31,16 @@
 
   $( "#run" ).click(function() {
     $('#main-div').html("");
-    $( "#main-div" ).append( 
-        "<form action='/full_app'><button class='btn btn-danger' type='submit'>Start Here</button></form>");
+    $( "#main-div" ).append(
+        "<div style='padding:20px'>" +
+        "<form action='/full_app'><button class='btn btn-danger' type='submit'>Grab Your Vinyl and Hop On Your Fixie</button></form>" +
+        "</div>");
   });
 
   $( "#about" ).click(function() {
     $('#main-div').html("");
     $( "#main-div" ).html( 
+          "<div style='padding:20px'>" +
           "<p>MyHipsterBoyfriend is a music recognition system that enables the user to " +
           "record audio through their computer's microphone and compare it, using acoustic " +
           "fingerprinting and interval matching, to a self-seeded database of existing " +
@@ -45,12 +48,14 @@
           "<p>Please take a look at the documentation for further exploration of the "+
           "algorithm and subsequent functionality.</p>" +
           "<br>" +
-          "<a href='https://github.com/rhythmsection/MHB'><img src='/static/images/github.png'></a>" );
+          "<a href='https://github.com/rhythmsection/MHB'><img src='/static/images/github.png'></a>" + 
+          "</div>");
   });
 
   $( "#instructions" ).click(function() {
     $('#main-div').html("");
-    $( "#main-div" ).html( 
+    $( "#main-div" ).html(
+          "<div style='padding:20px'>" +
           "<p style='text-align:left'><ul style='text-align:left'>" +
           "<li>Fire up your Chrome browser (MHB does not work in Safari)</li>" +
           "<li>Click 'Allow' when the browser asks permission to use your microphone</li>" +
@@ -59,7 +64,7 @@
           "the listed tracks into your microphone</li>" +
           "</ul>" +
           "MyHipsterBoyfriend will attempt to match your clip with one of the songs in its "+
-          "database. Have fun!</p>");
+          "database. Have fun!</p></div>");
   });
 
 

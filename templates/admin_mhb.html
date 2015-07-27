@@ -6,7 +6,7 @@
 		</div>
 		<div id="results">
 			<button class="btn btn-danger" onclick="startRecording(this);">record <span class="glyphicon glyphicon-record" aria-hidden="true"></span></button>
-      <button class="btn btn-default disabled" onclick="">Record Test Results</button>
+      <button type="button" id="test-results" class="btn btn-default disabled" onclick="">Record Test Results</button>
 		</div>
     <br>
         <p><strong>Recording Log</strong></p>
@@ -34,6 +34,7 @@
     function startRecording(button) {
       recorder && recorder.record();
       button.disabled = true;
+      $("#test-results").addClass("disabled") 
       __log('Recording...');
       setTimeout(function() { stopRecording(button) }, 10000);
     }
@@ -67,6 +68,7 @@
                     }
                     $("#offset_results").append("<tr><td>" + tracks[i].title + "</td><td><i>" + tracks[i].artist + "</i></td><td>" + tracks[i].offset + "</td></tr>")
                   }
+                $("#test-results").removeClass("disabled") 
               }
           });
         });

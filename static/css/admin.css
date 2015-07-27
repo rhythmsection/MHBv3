@@ -1,3 +1,7 @@
+body {
+	background-color: #C9C9C9;
+}
+
 #content-background {
 	background-image: url("../images/hipster_splash.jpg"); 
 	background-size: 100% 100%; 
@@ -16,4 +20,16 @@
 .transparent {
   background:#7f7f7f;
   background:rgba(0,0,0,0.5);
+}
+
+#recording {
+	background-image: url("../images/boombox_div.png"); 
+	height: 100%; 
+	width: 100%;
+}
+
+#main-div {
+	color:white; 
+	visibility:visible; 
+	padding:0;
 }
