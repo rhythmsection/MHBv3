@@ -1,6 +1,6 @@
 from flask import Flask, session, render_template, redirect, request, flash
 from werkzeug.utils import secure_filename
-from model import connect_to_db, db, Fingerprint
+from model import connect_to_db, db, Fingerprint, AppTest
 import fingerprint
 import cPickle
 import os
@@ -96,6 +96,32 @@ def testing_tools():
 	songs_in_db = Fingerprint.query.all()
 	return render_template("testing.html", songs_in_db = songs_in_db)
 
+@app.route('/add_test_data', methods = ['POST'])
+def add_test_data():
+
+	'''Add individual music data (including fingerprint) to database.'''
+
+	song_played = request.form.get('song_played')
+	artist_played = request.form.get('artist_played')
+	noise_level = int(request.form.get('noise_level'))
+	match = int(request.form.get('match'))
+	highest_match_title = session['match']['title']
+	highest_match_artist = session['match']['artist']
+	highest_match_offset = int(session['match']['offset'])
+
+	new_test_data = AppTest(song_played = song_played,
+								  artist_played = artist_played,
+								  noise_level = noise_level,
+								  match = match,
+								  highest_match_title = highest_match_title,
+								  highest_match_artist = highest_match_artist,
+								  highest_offset = highest_match_offset)
+
+	db.session.add(new_test_data)
+	db.session.commit()
+	del session['match']
+	return redirect("/database")
+
 
 @app.route('/mini_app')
 def testing_app():
@@ -126,6 +152,10 @@ def run_algorithm():
 	comparison.change_stereo_to_mono(filename)
 	time.sleep(1)
 	database_iteration = comparison.compare_fingerprint_to_database("new_user_input.wav")
+
+	for song in database_iteration:
+		if song["high_match"] == True:
+			session['match'] = {'title': song['title'], 'artist': song['artist'], 'offset': song['offset']}
 	return json.dumps(database_iteration)
 
 

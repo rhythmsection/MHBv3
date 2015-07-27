@@ -25,6 +25,7 @@ class AppTest(db.Model):
     highest_match_artist = db.Column(db.String(50), nullable = True)
     highest_offset = db.Column(db.Integer, nullable = True)
     noise_level = db.Column(db.Integer, nullable = True)
+    match = db.Column(db.Boolean, nullable = True)
 
 
 def connect_to_db(app):
