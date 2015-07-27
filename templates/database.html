@@ -1,0 +1,65 @@
+{% extends 'admin.html' %}
+{% block body %}
+
+	<div class="container">
+	    <div class="row" style="margin-top: 20px">
+	        <div class="col-lg-6 col-sm-6">
+	        	<div class="well"><strong><p>Process file for fingerprinting + addition to database</p></strong>
+	        		<hr>
+	        		<form action="/add_fingerprint" method="POST" enctype="multipart/form-data">
+		        		<div class="input-group">
+	  						<span class="input-group-addon" id="basic-addon1">Title</span>
+	  						<input type="text" class="form-control" name="title" placeholder="song title" aria-describedby="basic-addon1">
+						</div>
+						<br>	
+						<div class="input-group">
+	  						<span class="input-group-addon" id="basic-addon1">Artist</span>
+	  						<input type="text" class="form-control" name="artist" placeholder="song artist" aria-describedby="basic-addon1">
+						</div>
+						<br>
+						<div class="input-group">
+	  						<span class="input-group-addon" id="basic-addon1">Music File</span>
+	  						<input type="file" class="form-control" name="music_file" aria-describedby="basic-addon1">
+						</div>
+						<div class="input-group" style="padding-left: 7px">
+	  						<i>Note: Music files are not saved in database.</i>
+						</div>
+						<div align="right">
+						<button class="btn btn-default" type="submit">Add To Database</button>	
+						</div>
+					</form>	
+    			</div>
+    			<div class="well" align="center">
+    				<form action="/empty_database" method="post">
+    					<button type="submit" class="btn btn-danger" name="destroy">
+    					DESTROY DATABASE</button>
+    			</form>
+    			</div>
+    		</div>
+		        <div class="col-lg-6 col-sm-6">
+		        	<div class="well">
+		        	<strong><p>Current Database</p></strong>
+		        	<hr>
+						<table class="table" style="font-size:14px;">
+						    <tr>
+						    <th>Song Title</th>
+						    <th>Artist</th> 
+						    <th style="text-align:right">Delete?</th>
+						  </tr>
+						  {% for song in songs_in_db %}
+						  <tr>
+						    <td>{{ song.title }}</td>
+						    <td><i>{{ song.artist}}</i></td> 
+						    <td style="text-align:right"><form action="/delete_song"><button type="submit" class="btn btn-default btn-xs" name="delete_song" value="{{ song.id }}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button></form></td>
+						  </tr>
+						{% endfor %}
+						</table>
+
+		        </div>
+	    	</div>
+	    </div>
+	  	<hr>
+	</div>
+
+{% endblock %}

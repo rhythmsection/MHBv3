@@ -1,0 +1,49 @@
+
+<html ng-app lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MHB v3 | Admin Portal</title>
+    <link href="static/css/bootstrap-admin.css" rel="stylesheet">
+    <link href="static/css/admin.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="static/js/recorder.js"></script>
+  </head>
+  <body>
+    <nav class="navbar-default" style="margin-bottom:0px; border-bottom: 1px solid lightgray">
+      <div class="container-fluid" style="margin-right: 10px">
+          <ul class="nav nav-tabs navbar-left">
+            <li role="presentation"><a href="/database">Database Management</a></li>
+            <li role="presentation"><a href="/testing">User Testing</a></li>
+            <li role="presentation"><a href="/">Data Viz</a></li>
+          </ul>
+          <ul class="nav navbar-right" style="margin-top: 4px;">
+          </ul>
+          <ul class="nav navbar-right" style="margin-right: 15px; margin-top: 6px;">
+            <li><h4>M<font color="red">H</font>B v3 | ADMIN PORTAL</h4></li>
+          </ul>
+      </div>
+    </nav>
+    <div id="content-background">
+      <center><a href="/"><img src="static/images/mhblogo.png"></a></center>
+      {% block body %}
+      <div class="container-fluid">
+      <div class="row" style="margin-top: 20px">
+       <div class="col-lg-6 col-sm-6">
+            <div class="well">
+              <form action="/full_app">
+                <div>
+                  {% block mhb %}
+                    <button class="btn btn-default" type="submit">miniMHB Terminal Go</button>
+                  {% endblock %}  
+                </div>
+              </form> 
+            </div>
+          </div>
+      {% endblock %}
+    </div>
+  </body>
+</html>

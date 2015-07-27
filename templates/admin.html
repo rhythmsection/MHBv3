@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% block body %}
+	<center>
+  	<div class="container-fluid cent" style="width:60%">
+		<div class="btn-group btn-group-justified" role="group">
+		  <div class="btn-group" role="group" style="margin-top:10px">
+		    <button id="run" type="button" class="btn btn-default">Record and Run</button>
+		  </div>
+		  <div class="btn-group" role="group">
+		    <button id="instructions" type="button" class="btn btn-default">Instructions</button>
+		  </div>
+		  <div class="btn-group" role="group">
+		    <button id="database_list" type="button" class="btn btn-default">Current Database</button>
+		  </div>
+		  <div class="btn-group" role="group">
+		    <button id="about" type="button" class="btn btn-default">About MHB</button>
+		  </div>
+		</div>
+        <div id="main-div" class="well transparent" style="color:white; visibility:visible">
+          <form action="/full_app">
+            <div>
+              {% block mhb %}
+                <button class="btn btn-danger" type="submit">Start Here</button>
+              {% endblock %}  
+            </div>
+          </form>
+		</div>
+	</center>
+
+<script>
+
+  $( "#run" ).click(function() {
+    $('#main-div').html("");
+    $( "#main-div" ).append( 
+        "<form action='/full_app'><button class='btn btn-danger' type='submit'>Start Here</button></form>");
+  });
+
+  $( "#about" ).click(function() {
+    $('#main-div').html("");
+    $( "#main-div" ).html( 
+          "<p>MyHipsterBoyfriend is a music recognition system that enables the user to " +
+          "record audio through their computer's microphone and compare it, using acoustic " +
+          "fingerprinting and interval matching, to a self-seeded database of existing " +
+          "acoustic fingerprints to find the best match for that song.</p>" +
+          "<p>Please take a look at the documentation for further exploration of the "+
+          "algorithm and subsequent functionality.</p>" +
+          "<br>" +
+          "<a href='https://github.com/rhythmsection/MHB'><img src='/static/images/github.png'></a>" );
+  });
+
+  $( "#instructions" ).click(function() {
+    $('#main-div').html("");
+    $( "#main-div" ).html( 
+          "<p style='text-align:left'><ul style='text-align:left'>" +
+          "<li>Fire up your Chrome browser (MHB does not work in Safari)</li>" +
+          "<li>Click 'Allow' when the browser asks permission to use your microphone</li>" +
+          "<li>Click the microphone button in the UI</li>" + 
+          "<li>While the microphone is red (roughly 10 seconds), play a sample from one of "+
+          "the listed tracks into your microphone</li>" +
+          "</ul>" +
+          "MyHipsterBoyfriend will attempt to match your clip with one of the songs in its "+
+          "database. Have fun!</p>");
+  });
+
+
+  $( "#database_list" ).click(function() {
+    $('#main-div').load("/mini_base");
+  });
+
+</script>
+
+{% endblock %}

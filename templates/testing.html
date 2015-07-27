@@ -1,0 +1,90 @@
+{% extends 'admin.html' %}
+{% block body %}
+
+	<div class="container">
+	    <div class="row" style="margin-top: 20px">
+	        <div class="col-lg-6 col-sm-6">
+	        	<div class="well"><strong><p>MHB Testing Portal</p></strong>
+	        		<form action="/mini_app">
+		        		<div>
+		        			{% block mhb %}
+								<button class="btn btn-default" type="submit">miniMHB Terminal Go</button>
+							{% endblock %}	
+						</div>
+					</form>	
+    			</div>
+    			<div class="well"><strong><p>Test Results Survey</p></strong>
+    			<hr>
+	        		<form action="/add_fingerprint" method="POST">
+		        		<div class="input-group">
+	  						<span class="input-group-addon" id="basic-addon1">Title</span>
+	  						<input type="text" class="form-control" name="submitted_title" placeholder="title of song submitted" aria-describedby="basic-addon1">
+						</div>
+						<br>	
+						<div class="input-group">
+	  						<span class="input-group-addon" id="basic-addon1">Artist</span>
+	  						<input type="text" class="form-control" name="submitted_artist" placeholder="artist of song submitted" aria-describedby="basic-addon1">
+						</div>
+						<br>
+						<div class="input-group">
+	  						<p>Audio Source</p>
+							<select class="form-control">
+							  <option>Speaker-to-Microphone</option>
+							  <option>Live Music</option>
+							  <option>Humming/Whistling/Singing</option>
+							  <option>Other</option>
+							</select>
+						</div>
+						<br>
+						<div class="input-group">
+							<p>Recording Environment</p>
+							<div class="btn-group" data-toggle="buttons">
+							  <label class="btn btn-default active">
+							    <input type="radio" name="options" id="option1" autocomplete="off" checked>Low Noise
+							  </label>
+							  <label class="btn btn-default">
+							    <input type="radio" name="options" id="option2" autocomplete="off">Average Noise
+							  </label>
+							  <label class="btn btn-default">
+							    <input type="radio" name="options" id="option3" autocomplete="off">High Noise
+							  </label>
+							</div>
+						</div>
+						<br>
+						<div class="input-group">
+							<p>Successful Match?</p>
+							<div class="btn-group" data-toggle="buttons">
+							  <label class="btn btn-default active">
+							    <input type="radio" name="options" id="option1" autocomplete="off" checked>Yes
+							  </label>
+							  <label class="btn btn-default">
+							    <input type="radio" name="options" id="option2" autocomplete="off">No
+							  </label>
+							</div>
+						</div>
+						<br>						
+						<div align="right">
+							<button class="btn btn-danger" type="submit">Submit Test Results</button>	
+						</div>
+					</form>	
+    			</div>
+    		</div>
+		        <div class="col-lg-6 col-sm-6"><div class="well">
+		        	<strong><p>Offset Results By Song</p></strong>
+		        	<hr>		
+					<div>
+						<table id="offset_results" class="table">
+						    <tr>
+							    <th>Song Title</th>
+							    <th>Artist</th> 
+							    <th>Offset</th>
+						  	</tr>
+						</table>
+					</div>
+		        </div>
+	    	</div>
+	    </div>
+	  	<hr>
+	</div>
+
+{% endblock %}

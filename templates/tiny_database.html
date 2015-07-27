@@ -1,0 +1,12 @@
+    <table class='table' style="color:white; font-size:14px; width: 80%">
+        <tr>
+            <th>Song Title</th>
+            <th>Artist</th> 
+        </tr>
+        {% for song in songs_in_db %}
+        <tr>
+            <td>{{ song.title }}</td>
+            <td><i>{{ song.artist}}</i></td>
+        </tr>
+        {% endfor %}
+    </table>
