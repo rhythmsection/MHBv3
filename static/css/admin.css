@@ -18,8 +18,10 @@ body {
 }
 
 .transparent {
-  background:#7f7f7f;
   background:rgba(0,0,0,0.5);
+  color:white !important;
+  font-color: white !important; 
+
 }
 
 #recording {
@@ -32,4 +34,14 @@ body {
 	color:white; 
 	visibility:visible; 
 	padding:0;
+}
+
+#main-title {
+	color:white;
+	font-color: white; 
+}
+
+.color-font {
+	color:white;
+	font-color: white;
 }

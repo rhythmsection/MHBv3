@@ -3,15 +3,20 @@
 
 {% raw %}
 	<div id="action_div" ng-controller="MusicResultsController" style="margin:0; padding:0">
-		<div id="main_title" class="well" ng-show="isFound" class="ng-hide">
-		</div>
-    <div id="loading" ng-show="isLooking" class="ng-hide">
-        <img ng-src="{{hipsterText}}" alt="get_sound">
-    </div> 
-		<div id="results">
-			<button type="button" ng-click="startRecording(this);" ng-disabled="isRecording">
+		<div id="results" class="row">
+    <div class="col-lg-6 col-sm-6">
+			<button type="button" style="background:transparent; border:0" ng-click="startRecording(this);" ng-disabled="isRecording">
         <img ng-src="{{recordingImage}}" alt="get_sound">
       </button>
+    </div>
+    <div class="col-lg-6 col-sm-6">
+      <br>
+      <br>
+      <div id="pointer" class="transparent well" style="font-color:white; margin:10px;" ng-hide="isFound" class="ng-hide">
+        <b>SPIN THE TURNTABLE</b>
+      </div>
+      <div id="main_title" class="transparent well" style="font-color:white; margin:10px;" ng-show="isFound" class="ng-hide">
+      </div>
 		</div>
 	</div>
 {% endraw %}
@@ -30,16 +35,15 @@
       $scope.isRecording = false;
       $scope.isFound = false;
       $scope.isLooking = false;
-      $scope.recordingImage = "/static/images/microphone_ready.gif";
+      $scope.recordingImage = "/static/images/turntable_wait.gif";
       $scope.loadBar = "/static/images/load_bar.gif"
-      $scope.hipsterText = "/static/images/snarkyText.gif"
 
       $scope.startRecording = function(button) {
         recorder && recorder.record();
         setTimeout(function(){ 
           $scope.stopRecording(button);
           }, 10000);
-        $scope.recordingImage = "/static/images/microphone_recording.gif";
+        $scope.recordingImage = "/static/images/turntable_record.gif";
         $scope.isRecording = true;
         $scope.isLooking = false;
 
@@ -48,7 +52,7 @@
 
       $scope.stopRecording = function(button){
         recorder && recorder.stop();
-        $scope.recordingImage = "/static/images/microphone_comparing.gif";
+        $scope.recordingImage = "/static/images/turntable_comparing.gif";
         returnResults();
         $scope.isRecording = false;
         $scope.$apply();
@@ -71,12 +75,12 @@
                     $scope.tracks = JSON.parse(data)
                     for (i = 0; i < $scope.tracks.length; i++){
                       if ($scope.tracks[i].high_match == true){
-                        $("#main_title").html("<p><b><h2>" + $scope.tracks[i].title + "</b> - <i>" + $scope.tracks[i].artist + "</h2></i></p>")
+                        $("#main_title").html("<p class='color-font'><b><h5 class='color-font'>" + $scope.tracks[i].title + "</b> - <i>" + $scope.tracks[i].artist + "</h4></i></p>")
                       };
                     };
                     $scope.isLooking = false;
                     $scope.isFound = true;
-                    $scope.recordingImage = "/static/images/microphone_found.gif";
+                    $scope.recordingImage = "/static/images/turntable_success.gif";
                     $scope.$apply();
                 }
             });

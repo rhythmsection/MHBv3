@@ -16,30 +16,32 @@
 		    <button id="about" type="button" class="btn btn-default">About MHB</button>
 		  </div>
 		</div>
-        <div id="main-div" class="well transparent">
-          <form action="/full_app" style="margin-bottom:0">
-            <div>
-              {% block mhb %}
-                <button class="btn btn-danger" type="submit">Grab Your Vinyl and Hop On Your Fixie</button>
-              {% endblock %}  
-            </div>
-          </form>
-		</div>
+      <div id="info_text">
+        <div id="text_block" class="well transparent" style="display:none; margins:0">
+        </div> 
+        {% block mhb %}
+        {% endblock %}
+      </div>  
 	</center>
 
 <script>
 
+
+
   $( "#run" ).click(function() {
-    $('#main-div').html("");
-    $( "#main-div" ).append(
-        "<div style='padding:20px'>" +
-        "<form action='/full_app'><button class='btn btn-danger' type='submit'>Grab Your Vinyl and Hop On Your Fixie</button></form>" +
+  $("#text_block").show()
+  $("#action_div").css("visibility", "hidden")
+    $('#text_block').html("");
+    $('#text_block').append(
+        "<form action='/full_app' style='margin-bottom:0'><button class='btn btn-danger' type='submit'>Grab Your Vinyl and Hop On Your Fixie</button></form>" +
         "</div>");
   });
 
   $( "#about" ).click(function() {
-    $('#main-div').html("");
-    $( "#main-div" ).html( 
+    $("#text_block").show()
+    $("#action_div").css("visibility", "hidden")
+    $('#text_block').html("");
+    $('#text_block').html( 
           "<div style='padding:20px'>" +
           "<p>MyHipsterBoyfriend is a music recognition system that enables the user to " +
           "record audio through their computer's microphone and compare it, using acoustic " +
@@ -53,14 +55,16 @@
   });
 
   $( "#instructions" ).click(function() {
-    $('#main-div').html("");
-    $( "#main-div" ).html(
+    $("#text_block").show()
+    $("#action_div").css("visibility", "hidden")
+    $('#text_block').html("");
+    $('#text_block').html(
           "<div style='padding:20px'>" +
           "<p style='text-align:left'><ul style='text-align:left'>" +
           "<li>Fire up your Chrome browser (MHB does not work in Safari)</li>" +
           "<li>Click 'Allow' when the browser asks permission to use your microphone</li>" +
-          "<li>Click the microphone button in the UI</li>" + 
-          "<li>While the microphone is red (roughly 10 seconds), play a sample from one of "+
+          "<li>Click the turntable button in the UI</li>" + 
+          "<li>While the turntable pulses red (roughly 10 seconds), play a sample from one of "+
           "the listed tracks into your microphone</li>" +
           "</ul>" +
           "MyHipsterBoyfriend will attempt to match your clip with one of the songs in its "+
@@ -69,7 +73,9 @@
 
 
   $( "#database_list" ).click(function() {
-    $('#main-div').load("/mini_base");
+    $("#text_block").show()
+    $("#action_div").css("visibility", "hidden")
+    $('#text_block').load("/mini_base");
   });
 
 </script>
